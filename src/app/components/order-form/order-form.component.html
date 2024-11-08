@@ -95,12 +95,15 @@
                 </div>
             </div>
         }
+        @if (orderForm.get('products')?.getError('duplicatedProduct')) {
+            <div class="text-danger">Productos duplicados</div>
+        }
     </div>
 
     <!-- PRODUCTOS SELECCIONADOS -->
     <div class="row">
         <ul>
-            
+
         </ul>
     </div>
 </form>

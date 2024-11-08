@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
@@ -19,11 +19,18 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup = new FormGroup({
     customerName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    products: new FormArray([], [Validators.required])
+    products: new FormArray([], [Validators.required, this.uniqueProductValidator])
   });
 
   ngOnInit(): void {
     this.obtainProducts();
+  }
+
+  // VALIDACION SINCRONA PERSONALIZADA
+  uniqueProductValidator(productsAarray: FormArray): ValidationErrors | null {
+    const selectedProdIds = productsAarray.controls.map(control => control.get('productId')?.value as Number);
+    const hasDuplicates = selectedProdIds.some((id, index) => selectedProdIds.indexOf(id) !== index);
+    return hasDuplicates ? {duplicatedProduct: true} : null;
   }
 
   get products(){
