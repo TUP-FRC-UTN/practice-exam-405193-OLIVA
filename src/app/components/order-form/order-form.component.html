@@ -7,15 +7,15 @@
                 <input type="text" class="form-control" id="customerName" formControlName="customerName">
             </div>
         </div>
+
+        <!-- EMAIL -->
+        <div class="col-6">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email">
+            </div>
+        </div> 
     </div>
-    
-    <!-- EMAIL -->
-    <div class="col-6">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" formControlName="email">
-        </div>
-    </div>    
 
     <!-- PRODUCTOS -->
     <div class="row">
@@ -53,7 +53,7 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="price" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="price" formControlName="price">
+                        <input type="number" class="form-control" id="price" formControlName="price" readonly>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="stock" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="stock" formControlName="stock">
+                        <input type="number" class="form-control" id="stock" formControlName="stock" readonly>
                     </div>
                 </div>
 
@@ -70,7 +70,6 @@
                     <button type="button" class="btn btn-danger" (click)="removeProd($index)">X</button>
                 </div>
             </div>
-            
         }
     </div>
 </form>

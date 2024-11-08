@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 
@@ -32,10 +32,24 @@ export class OrderFormComponent implements OnInit {
   addProd(){
     const productForm = new FormGroup({
       productId: new FormControl(),
-      quantity: new FormControl(),
-      stock: new FormControl(),
-      price: new FormControl()
+      quantity: new FormControl(1),
+      stock: new FormControl(0),
+      price: new FormControl(0)
     });
+
+    productForm.get('productId')?.valueChanges.subscribe(id => {
+      const prod = this.productList.find(p => p.id === id);
+      if(prod){
+        //Actualiza los valores de los controles
+        productForm.patchValue({
+          price: prod.price,
+          stock: prod.stock
+        })
+
+        // Agrego validador al control de cantidad
+        productForm.get('quantity')?.addValidators([Validators.required, Validators.min(1), Validators.max(prod.stock)]);
+      }
+    })
 
     this.products.push(productForm);
   }
