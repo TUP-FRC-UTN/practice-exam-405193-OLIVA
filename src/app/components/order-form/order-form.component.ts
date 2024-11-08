@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-order-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './order-form.component.html',
   styleUrl: './order-form.component.css'
 })
@@ -16,9 +17,9 @@ export class OrderFormComponent implements OnInit {
   productList: Product[] = [];
 
   orderForm: FormGroup = new FormGroup({
-    customerName: new FormControl(),
-    email: new FormControl(),
-    products: new FormArray([])
+    customerName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    products: new FormArray([], [Validators.required])
   });
 
   ngOnInit(): void {

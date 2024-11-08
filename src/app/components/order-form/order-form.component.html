@@ -4,7 +4,14 @@
         <div class="col-6">
             <div class="mb-3">
                 <label for="customerName" class="form-label">Cliente</label>
-                <input type="text" class="form-control" id="customerName" formControlName="customerName">
+                <input type="text" class="form-control" id="customerName" formControlName="customerName"
+                [ngClass]="{'is-invalid' : orderForm.get('customerName')?.invalid && orderForm.get('customerName')?.touched}">
+                @if (orderForm.get('customerName')?.getError('minlength')) {
+                    <div class="text-danger">Debe ingresar al menos 3 caracteres</div>
+                }
+                @if (orderForm.get('customerName')?.getError('required')) {
+                    <div class="text-danger">Nombre requerido</div>
+                }
             </div>
         </div>
 
@@ -12,7 +19,14 @@
         <div class="col-6">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" formControlName="email">
+                <input type="email" class="form-control" id="email" formControlName="email"
+                [ngClass]="{'is-invalid' : orderForm.get('email')?.invalid && orderForm.get('email')?.touched}">
+                @if (orderForm.get('email')?.getError('email')) {
+                    <div class="text-danger">Debe ingresar un email valido</div>
+                }
+                @if (orderForm.get('email')?.getError('required')) {
+                    <div class="text-danger">Email requerido</div>
+                }
             </div>
         </div> 
     </div>
@@ -45,7 +59,17 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="quantity" formControlName="quantity">
+                        <input type="number" class="form-control" id="quantity" formControlName="quantity"
+                        [ngClass]="{'is-invalid' : product.get('quantity')?.invalid && product.get('quantity')?.touched}">
+                        @if (product.get('quantity')?.getError('max')) {
+                            <div class="text-danger">La cantidad no puede superar el stock</div>
+                        }
+                        @if (product.get('quantity')?.getError('min')) {
+                            <div class="text-danger">La cantidad debe ser mayor a cero</div>
+                        }
+                        @if (product.get('quantity')?.getError('required')) {
+                            <div class="text-danger">La cantidad es requerida</div>
+                        }
                     </div>
                 </div>
 
@@ -71,5 +95,12 @@
                 </div>
             </div>
         }
+    </div>
+
+    <!-- PRODUCTOS SELECCIONADOS -->
+    <div class="row">
+        <ul>
+            
+        </ul>
     </div>
 </form>
