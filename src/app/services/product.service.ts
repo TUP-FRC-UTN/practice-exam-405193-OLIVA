@@ -13,6 +13,10 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.url}products`);
   }
 
+  getOrders() {
+    return this.http.get<Order[]>(`${this.url}orders`);
+  }
+
   getOrdersByEmail(email: string) {
     return this.http.get<Order[]>(`${this.url}orders?email=${email}`);
   }

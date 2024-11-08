@@ -95,30 +95,6 @@
       "total": 1529.982,
       "orderCode": "L.com222249",
       "timestamp": "2024-10-28T14:53:42.249Z"
-    },
-    {
-      "id": "8155",
-      "orden": {
-        "customerName": "maxc",
-        "email": "max@mail.com",
-        "products": [
-          {
-            "productId": "1",
-            "quantity": 1,
-            "stock": 50,
-            "price": 999.99
-          },
-          {
-            "productId": "2",
-            "quantity": 1,
-            "stock": 100,
-            "price": 699.99
-          }
-        ],
-        "total": 1529.98,
-        "orderCode": "M.com2024-11-08T06:52:44.970Z",
-        "timestamp": "2024-11-08T06:52:44.970Z"
-      }
     }
   ]
 }

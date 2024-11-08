@@ -1,1 +1,27 @@
 <p>order-list works!</p>
+
+<!-- FILTRADO -->
+<input type="text" class="form-control" placeholder="Buscador..." [formControl]="searchTerm">
+
+<div>
+    <table class="table">
+        <thead>
+            <th>cliente</th>
+            <th>mail</th>
+            <th>productos</th>
+            <th>total</th>
+            <th>fecha</th>
+        </thead>
+        <tbody>
+            @for (order of orderList; track $index) {
+                <tr>
+                    <td>{{order.customerName}}</td>
+                    <td>{{order.email}}</td>
+                    <td>{{order.products.length}} itmes</td>
+                    <td>{{order.total}}</td>
+                    <td>{{order.timestamp}}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
