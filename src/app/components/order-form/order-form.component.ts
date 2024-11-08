@@ -21,7 +21,16 @@ export class OrderFormComponent {
 
   addProd(){
     const productForm = new FormGroup({
-      
-    })
+      productId: new FormControl(),
+      quantity: new FormControl(),
+      stock: new FormControl(),
+      price: new FormControl()
+    });
+
+    this.products.push(productForm);
+  }
+
+  removeProd(i: number){
+    this.products.removeAt(i);
   }
 }
