@@ -34,7 +34,9 @@
                     <div class="mb-3">
                         <label for="productId" class="form-label">Producto</label>
                         <select class="form-select" formControlName="productId">
-                            
+                            @for (p of productList; track $index) {
+                                <option [value]="p.id">{{p.name}}</option>
+                            }
                         </select>
                     </div>
                 </div>

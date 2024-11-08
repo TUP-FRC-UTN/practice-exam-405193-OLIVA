@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-order-form',
@@ -8,12 +10,20 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
   templateUrl: './order-form.component.html',
   styleUrl: './order-form.component.css'
 })
-export class OrderFormComponent {
+export class OrderFormComponent implements OnInit {
+  private readonly productService = inject(ProductService);
+
+  productList: Product[] = [];
+
   orderForm: FormGroup = new FormGroup({
     customerName: new FormControl(),
     email: new FormControl(),
     products: new FormArray([])
   });
+
+  ngOnInit(): void {
+    this.obtainProducts();
+  }
 
   get products(){
     return this.orderForm.controls['products'] as FormArray;
@@ -32,5 +42,12 @@ export class OrderFormComponent {
 
   removeProd(i: number){
     this.products.removeAt(i);
+  }
+
+  obtainProducts(){
+    this.productService.getProducts().subscribe({
+      next: data => this.productList = data,
+      error: e => console.log(e)
+    });
   }
 }
