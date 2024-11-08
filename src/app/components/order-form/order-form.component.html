@@ -1,5 +1,5 @@
 <form [formGroup]="orderForm">
-    <div class="row">
+    <div class="row mt-5">
         <!-- CLIENTE -->
         <div class="col-6">
             <div class="mb-3">
@@ -27,12 +27,15 @@
                 @if (orderForm.get('email')?.getError('required')) {
                     <div class="text-danger">Email requerido</div>
                 }
+                @if (orderForm.get('email')?.getError('errorPedido')) {
+                    <div class="text-danger">Limite de 3 pedidos en 24hs</div>
+                }
             </div>
         </div> 
     </div>
 
     <!-- PRODUCTOS -->
-    <div class="row">
+    <div class="row mt-5">
         <div class="col">
             <h1>Productos</h1>
         </div>
@@ -101,9 +104,23 @@
     </div>
 
     <!-- PRODUCTOS SELECCIONADOS -->
+    <div class="row mt-5">
+        <h1>Productos Seleccionados</h1>
+    </div>
     <div class="row">
         <ul>
 
         </ul>
     </div>
+
+    <!-- TOTAL -->
+    <div class="row">
+        <div class="col">TOTAL: {{total}}</div>
+    </div>
+
+    @if (discount) {
+        <div class="row text-success"> 10% Descuento aplicado</div>
+    }
+
+    <button type="button" class="btn btn-primary mt-5" (click)="saveOrder()">Create Order</button>
 </form>
